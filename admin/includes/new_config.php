@@ -3,13 +3,11 @@
 ///Connection constance
 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'gallery');
+define('DB_USER', 'php');
+define('DB_PASS', '123');
+define('DB_NAME', 'php');
 
 defined('DS')? null : define('DS',DIRECTORY_SEPARATOR);
-define('SITE_ROOT',"C:".DS."xampp".DS."htdocs".DS."project".DS."opp");
-define('INCLUDES_PATH' ,'C:'.DS.'xampp'.DS.'htdocs'.DS.'project'.DS.'opp'.DS.'admin'.DS.'includes');
-
-
+define('SITE_ROOT',"/var".DS."www".DS."html".DS."opp");
+define('INCLUDES_PATH' ,"/var".DS."www".DS."html".DS."opp".DS.'includes');
 ?>

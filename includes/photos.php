@@ -1,0 +1,105 @@
+<?php
+include_once "includes/db_object.php";
+include_once "includes/photo.php";
+include_once "includes/functions.php";
+include "includes/header.php";
+include_once "includes/session.php";
+
+
+if (!$session->is_signed_in()) {
+    redirect("includes/login.php");
+}
+
+$photos = Photo::find_all();
+?>
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+
+        <?php include "includes/top_nav.php" ?>;
+
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+
+
+        <?php include "includes/sidebar.php" ?>;
+
+        <!-- /.navbar-collapse -->
+
+    </nav>
+
+    <div id="page-wrapper">
+
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        PHOTOS
+                        <small>Subheading</small>
+                    </h1>
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Id</th>
+                                <th>File Name</th>
+                                <th>Title</th>
+                                <th>Size</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php foreach ($photos as $photo) : ?>
+                                <tr>
+                                <td><img src=" <?php echo $photo->pic_path(); ?>" alt="">
+
+                                <div class="pictures_link">
+
+
+                                    <a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+                                    <a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
+                                    <a href="##">View</a>
+
+                                </div>
+                                </td>
+                                <td><?php echo $photo->id; ?></td>
+                                <td><?php echo $photo->filename; ?></td>
+                                <td><?php echo $photo->title; ?></td>
+                                <td><?php echo $photo->size; ?></td>
+                                </tr>
+
+
+                            <?php endforeach; ?>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.container-fluid -->
+
+
+    </div>
+    <!-- /#page-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

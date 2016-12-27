@@ -1,33 +1,14 @@
-!DOCTYPE html>
-<html lang="en">
+<?php include "includes/header.php";
+include_once "includes/init.php";?>
 
-<head>
+<?php
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+//if (!$session->is_signed_in()) {
+//    redirect("includes/login.php");
+//}
 
-    <title>SB Admin - Bootstrap Admin Template</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
+$photos = Photo::find_all();
+?>
 
 <body>
 
@@ -42,7 +23,7 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 
 
-        <?php include"includes/sidebar.php"?>;
+        <?php include "includes/sidebar.php" ?>;
 
         <!-- /.navbar-collapse -->
 
@@ -57,16 +38,46 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         PHOTOS
-                        <small>Subheading </small>
+                        <small>Subheading</small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li>
-                            <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
-                        </li>
-                        <li class="active">
-                            <i class="fa fa-file"></i> Blank Page
-                        </li>
-                    </ol>
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Id</th>
+                                <th>File Name</th>
+                                <th>Title</th>
+                                <th>Size</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php foreach ($photos as $photo) : ?>
+                                <tr>
+                                <td><img src=" <?php echo $photo->pic_path(); ?>" alt="">
+
+                                <div class="pictures_link">
+
+
+                                    <a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+                                    <a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
+                                    <a href="##">View</a>
+
+                                </div>
+                                </td>
+                                <td><?php echo $photo->id; ?></td>
+                                <td><?php echo $photo->filename; ?></td>
+                                <td><?php echo $photo->title; ?></td>
+                                <td><?php echo $photo->size; ?></td>
+                                </tr>
+
+
+                            <?php endforeach; ?>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- /.row -->

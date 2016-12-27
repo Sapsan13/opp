@@ -1,7 +1,6 @@
-<?php require_once "header.php"?>
 <?php
-$session->logout();
 
+$session->logout();
 redirect ("login.php");
 
 ?>

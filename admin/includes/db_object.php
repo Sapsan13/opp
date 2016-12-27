@@ -1,18 +1,19 @@
+<?php include "init.php" ?>
+
 <?php
 
 class Db_object
 {
-
 
     public static function find_all()
     {
         return static::findQuery("SELECT * FROM " . static::$table . " ");
     }
 
-    public static function findById($user_id)
+    public static function findById($id)
     {
-        global $database;
-        $resultArray = static::findQuery("SELECT * FROM " . static::$table . " WHERE id= $user_id LIMIT 1 ");
+
+        $resultArray = static::findQuery("SELECT * FROM " . static::$table . " WHERE id= $id LIMIT 1 ");
 
         return !empty ($resultArray) ? array_shift($resultArray) : false;
     }
@@ -20,6 +21,7 @@ class Db_object
     public static function findQuery($sql)
     {
         global $database;
+
         $resultSet = $database->query($sql);
         $the_object_array = array();
 
@@ -37,11 +39,7 @@ class Db_object
 
         $object = new $calling_class;
 
-//            $object->id=$resultUsersBy['id'];
-//            $object->username=$resultUsersBy['username'];
-//            $object->password=$resultUsersBy['password'];
-//            $object->first_name=$resultUsersBy['first_name'];
-//            $object->last_name=$resultUsersBy['last_name'];
+
 
         foreach ($the_record as $theAttribute => $value) {
 
@@ -139,12 +137,15 @@ class Db_object
         return (mysqli_affected_rows($database->connection) == 1) ? true : false;
     }
 
-    public function save()
-    {
 
-        return isset ($this->id) ? $this->update() : $this->create();
-    }
 
+
+//    public function save()
+//    {
+//
+//        return isset ($this->id) ? $this->update() : $this->create();
+//    }
+//
     protected function properties()
     {
 
@@ -165,5 +166,3 @@ class Db_object
 
 }
 
-
-?>
