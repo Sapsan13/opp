@@ -3,9 +3,9 @@ include_once "includes/init.php";?>
 
 <?php
 
-//if (!$session->is_signed_in()) {
-//    redirect("includes/login.php");
-//}
+if (!$session->is_signed_in()) {
+    redirect("includes/login.php");
+}
 
 $photos = Photo::find_all();
 ?>
